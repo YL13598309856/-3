@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			.box{
+				width: 600px;
+				height: auto;
+				border: 1px solid gray;
+				margin: 100px auto;
+			}
+			.box textarea{
+				border: 1px solid gray;
+				width: 580px;
+				height: 78px;
+				resize: none;
+				margin-left: 10px;
+				margin-top: 10px;
+			}
+			.box button{
+				border: none;
+				width: 82px;
+				height: 30px;
+				background: #ffc09f;
+				font-weight: 700;
+				color: white;
+				border-radius: 4px;
+				margin-left: 510px;
+			}
+			.box ul{
+				list-style: none;
+			}
+			.box ul li{
+				width: 580px;
+				line-height: 30px;
+				margin-left:10px ;
+				border-bottom: 1px dashed gray;
+			}
+			.box ul li a{
+				float: right;
+				text-decoration: none;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload=function(){
+				function $(id){
+					return document.getElementById(id);
+				}
+				var but=$("release");
+				var textArea=$("content");
+				var box=$("box");
+				var ul=document.createElement("ul");
+				box.appendChild(ul);
+				but.onclick=function(){
+					var content=textArea.value;
+					textArea.value="";
+					if(content==""){
+						alert("内容不能为空");
+						return;
+					}
+					var li=document.createElement("li");
+					li.innerHTML=content+"<a href=javascript:;>删除</a>"
+					var childerenLi=ul.children;
+					if (childerenLi.length<0) {
+						ul.appendChild(li);
+					}else{
+						ul.insertBefore(li,ul.firstChild);
+					}
+					var as=document.getElementsByTagName("a");
+					for (var i=0;i<as.length;i++) {
+						as[i].onclick=function(){
+							ul.removeChild(this.parentNode);
+						}
+					}
+				}
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div class="box" id="box">
+			<textarea id="content"></textarea>
+			<button id="release">发布</button>
+			
+		</div>
+	</body>
+</html>
